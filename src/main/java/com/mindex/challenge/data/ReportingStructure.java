@@ -11,19 +11,12 @@ public class ReportingStructure {
     }
 
     //Getters and setters
-    public Employee getEmployee() {
-        return employee;
-    }
+    public Employee getEmployee() { return employee; }
 
-    public void setEmployee(Employee employee){
-        this.employee = employee;
-    }
+    public void setEmployee(Employee employee){ this.employee = employee; }
 
-    public int getNumberofReports(){
-        return numberOfReports;
-    }
+    public int getNumberofReports(){ return numberOfReports; }
 
-    public void setNumberOfReports(int numberOfReports){
-        this.numberOfReports = numberOfReports;
-    }
+    public void setNumberOfReports(int numberOfReports){ this.numberOfReports = numberOfReports; }
+
 }
