@@ -44,6 +44,7 @@ public class ReportingStructureServiceImplTest {
 
     @Test
     public void testGenerateReportingStructure() {
+        //Test to determine whether reports are being added and counted correctly
         Employee testEmployeeC = new Employee();
         testEmployeeC.setFirstName("Jack");
         testEmployeeC.setLastName("Doe");
@@ -71,6 +72,7 @@ public class ReportingStructureServiceImplTest {
 
         Employee createdEmployeeA = restTemplate.postForEntity(employeeUrl, testEmployeeA, Employee.class).getBody();
 
+        //Having problems with Unit test persisting? Updating in server
         restTemplate.put(employeeUrl + "/" + createdEmployeeB.getEmployeeId(), testEmployeeB);
         restTemplate.put(employeeUrl + "/" + createdEmployeeA.getEmployeeId(), testEmployeeA);
 
