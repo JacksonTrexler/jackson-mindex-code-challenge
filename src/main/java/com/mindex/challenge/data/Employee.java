@@ -1,8 +1,14 @@
 package com.mindex.challenge.data;
 
+import org.springframework.data.annotation.Id;
+
 import java.util.List;
 
 public class Employee {
+    //Persist wasn't working until I added this @Id annotation
+    //Was just creating new objects each time I PUT, so I couldn't retrieve them after attempting
+    //an update on an existing object
+    @Id
     private String employeeId;
     private String firstName;
     private String lastName;

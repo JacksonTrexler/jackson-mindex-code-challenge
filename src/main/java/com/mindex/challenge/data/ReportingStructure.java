@@ -15,7 +15,7 @@ public class ReportingStructure {
 
     public void setEmployee(Employee employee){ this.employee = employee; }
 
-    public int getNumberofReports(){ return numberOfReports; }
+    public int getNumberOfReports(){ return numberOfReports; }
 
     public void setNumberOfReports(int numberOfReports){ this.numberOfReports = numberOfReports; }
 

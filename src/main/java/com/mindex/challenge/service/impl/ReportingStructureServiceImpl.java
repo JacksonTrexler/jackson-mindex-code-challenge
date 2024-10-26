@@ -14,8 +14,8 @@ import java.util.HashSet;
 import java.util.List;
 
 @Service
-public class ReportingStructureImpl implements ReportingStructureService {
-    private static final Logger LOG = LoggerFactory.getLogger(ReportingStructureImpl.class);
+public class ReportingStructureServiceImpl implements ReportingStructureService {
+    private static final Logger LOG = LoggerFactory.getLogger(ReportingStructureServiceImpl.class);
 
 
     @Autowired
@@ -38,7 +38,7 @@ public class ReportingStructureImpl implements ReportingStructureService {
         //This is a little ugly, but keeps this recursive method a bit more self-contained
         //Don't want any problems with cyclical / duplicate reports, reports that show up again won't be counted
         if (employee == null || visited.contains(employee.getEmployeeId())) {
-            return null;
+            throw new IllegalArgumentException("Employee missing / cycle detected");
         }
         visited.add(employee.getEmployeeId());
         //If the employee doesn't have any reports, just return a structure with the full employee
@@ -54,7 +54,7 @@ public class ReportingStructureImpl implements ReportingStructureService {
             if (reportStructure == null) {
                 continue;
             }
-            count += 1 + reportStructure.getNumberofReports();
+            count += 1 + reportStructure.getNumberOfReports();
             richReports.add(reportStructure.getEmployee());
         }
         employee.setDirectReports(richReports);
