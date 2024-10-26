@@ -9,9 +9,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ReportingStructureImpl implements ReportingStructureService {
-    private static final Logger LOG = LoggerFactory.getLogger(EmployeeServiceImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(ReportingStructureImpl.class);
 
     @Autowired
     private EmployeeRepository employeeRepository;
@@ -25,9 +27,14 @@ public class ReportingStructureImpl implements ReportingStructureService {
 
     private int countReports(Employee employee) {
         int count = 0;
-        for (Employee report : employee.getDirectReports()) {
-            count += 1 + countReports(report);
+        List<Employee> directReports = employee.getDirectReports();
+        //Short-circuited null check on report list for employees without reports
+        if (directReports != null && !directReports.isEmpty()) {
+            for (Employee report : employee.getDirectReports()) {
+                count += 1 + countReports(report);
+            }
         }
+        System.out.println(count);
         return count;
     }
 }
