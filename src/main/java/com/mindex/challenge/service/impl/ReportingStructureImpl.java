@@ -30,8 +30,17 @@ public class ReportingStructureImpl implements ReportingStructureService {
         List<Employee> directReports = employee.getDirectReports();
         //Short-circuited null check on report list for employees without reports
         if (directReports != null && !directReports.isEmpty()) {
-            for (Employee report : employee.getDirectReports()) {
-                count += 1 + countReports(report);
+            for (Employee report : directReports) {
+                report = employeeRepository.findByEmployeeId(report.getEmployeeId());
+                count++;
+                //Can't run count reports on invalid emp id, will create NPE
+                //Whether or not this throws an exception, is not counted, or counts once is up to the business
+                if (report != null) {
+                    count += countReports(report);
+                }
+                else{
+                    LOG.warn("Could not retrieve someone's report: {}", employee.getFirstName());
+                }
             }
         }
         System.out.println(count);
